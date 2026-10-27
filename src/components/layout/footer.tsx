@@ -1,95 +1,81 @@
-import Link from "next/link";
+﻿import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { Brand } from "@/components/layout/brand";
 
-const product = [
-  { label: "Features", href: "#features" },
-  { label: "Pricing",  href: "#pricing"  },
-  { label: "Rewards",  href: "#rewards"  },
-  { label: "Blog",     href: "/blog"     },
-];
-
-const support = [
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "/contact" },
-  { label: "Dashboard", href: "/dashboard" },
-];
-
-const legal = [
-  { label: "Terms", href: "/terms" },
-  { label: "Privacy", href: "/privacy" },
+const groups = [
+  {
+    label: "Explore",
+    links: [
+      { label: "Games", href: "/games" },
+      { label: "Features", href: "/#features" },
+      { label: "Live preview", href: "/#showcase" },
+      { label: "Pricing", href: "/#pricing" },
+    ],
+  },
+  {
+    label: "Your Vanta",
+    links: [
+      { label: "Dashboard", href: "/dashboard" },
+      { label: "Create account", href: "/register" },
+      { label: "Updates & guides", href: "/blog" },
+      { label: "FAQ", href: "/#faq" },
+    ],
+  },
+  {
+    label: "The details",
+    links: [
+      { label: "Terms of service", href: "/terms" },
+      { label: "Privacy policy", href: "/privacy" },
+    ],
+  },
 ];
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] px-6 pt-14 pb-10">
-      <div className="mx-auto max-w-6xl">
-        {/* Top row */}
-        <div className="grid gap-12 md:grid-cols-4">
-          {/* Brand */}
-          <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5">
-              <span className="flex h-6 w-6 items-center justify-center rounded-md border border-white/[0.1] bg-bg-card text-fg">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <circle cx="7" cy="7" r="3" fill="currentColor" />
-                  <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.5" fill="none" />
-                </svg>
-              </span>
-              <span className="font-display text-sm font-bold tracking-tight">Ghost Overlay</span>
-            </Link>
-            <p className="mt-3 text-xs leading-relaxed text-fg-dim">
-              External overlays for competitive players. Fully external, always updated.
+    <footer className="border-t border-border bg-bg-raised/40 pb-7 pt-14">
+      <div className="site-container">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr]">
+          <div>
+            <Brand />
+            <p className="mt-5 max-w-[220px] text-[11px] leading-relaxed text-fg-dim">
+              A different point of view.
+              <br />
+              Built for the games you live in.
             </p>
+            <Link
+              href="/games"
+              className="mt-5 inline-flex items-center gap-1.5 text-[10px] text-cyan"
+            >
+              Find your world <ArrowUpRight size={12} />
+            </Link>
           </div>
-
-          {/* Product */}
-          <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-fg-dim">Product</p>
-            <ul className="flex flex-col gap-3">
-              {product.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-fg-soft transition-colors hover:text-fg">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-fg-dim">Support</p>
-            <ul className="flex flex-col gap-3">
-              {support.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-fg-soft transition-colors hover:text-fg">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-fg-dim">Legal</p>
-            <ul className="flex flex-col gap-3">
-              {legal.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-fg-soft transition-colors hover:text-fg">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {groups.map((group) => (
+            <div key={group.label}>
+              <p className="mb-5 font-mono text-[9px] uppercase tracking-widest text-fg-dim">
+                {group.label}
+              </p>
+              <ul className="space-y-3">
+                {group.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-[11px] text-fg-soft transition-colors hover:text-cyan"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-
-        {/* Bottom bar */}
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.06] pt-6">
-          <p className="text-xs text-fg-dim">&copy; {new Date().getFullYear()} Ghost Overlay. All rights reserved.</p>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-            <span className="text-xs text-fg-dim">Undetected</span>
-          </div>
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6 font-mono text-[8px] text-fg-dim">
+          <p>© {new Date().getFullYear()} VANTA. ALL RIGHTS RESERVED.</p>
+          <span className="flex items-center gap-2">
+            <span className="status-dot !h-1 !w-1" /> AN INDEPENDENT
+            PERSPECTIVE.
+          </span>
+          <span>NOT AFFILIATED WITH GAME DEVELOPERS.</span>
         </div>
       </div>
     </footer>

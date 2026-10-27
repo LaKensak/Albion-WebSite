@@ -2,17 +2,34 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "@/styles/globals.css";
 import { buildMeta } from "@/config/seo";
+import { MotionProvider } from "@/components/layout/motion-provider";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-display", display: "swap" });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = buildMeta();
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${outfit.variable}`}
+    >
       <body className="min-h-screen bg-bg text-fg antialiased">
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

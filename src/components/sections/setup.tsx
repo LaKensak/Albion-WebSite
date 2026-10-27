@@ -1,65 +1,81 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Download, Play, SlidersHorizontal } from "lucide-react";
+import {
+  ArrowRight,
+  Download,
+  KeyRound,
+  SlidersHorizontal,
+} from "lucide-react";
 
 const steps = [
   {
     num: "01",
-    icon: Download,
-    title: "Download",
-    desc: "Get the package from your dashboard once your payment is confirmed.",
+    icon: KeyRound,
+    title: "Make it yours.",
+    desc: "Choose your plan and complete your payment. Your license appears in your dashboard after confirmation.",
   },
   {
     num: "02",
-    icon: Play,
-    title: "Run the overlay",
-    desc: "Launch it before starting your game. Auto-detection handles the binding.",
+    icon: Download,
+    title: "Ready when you are.",
+    desc: "Download your package and follow the included setup guide. Launch Vanta alongside your game.",
   },
   {
     num: "03",
     icon: SlidersHorizontal,
-    title: "Configure",
-    desc: "Toggle modules, adjust filters, set hotkeys. Config saves automatically.",
+    title: "Find your perspective.",
+    desc: "Choose your modules, adjust your filters and set your hotkeys. Your configuration, your way.",
   },
 ];
 
 export function Setup() {
   return (
-    <section className="relative px-6 py-28">
-      <div className="divider mx-auto max-w-5xl" />
-      <div className="mx-auto mt-28 max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5 }}
-          className="mb-14"
-        >
-          <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-fg-dim">Setup</p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
-            Running in under 3 minutes.
-          </h2>
-        </motion.div>
-
-        <div className="grid gap-4 md:grid-cols-3">
-          {steps.map((s, i) => (
+    <section className="section-space border-y border-border bg-bg-raised/40">
+      <div className="site-container">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-5">
+          <div>
+            <p className="section-label">Less setup. More play.</p>
+            <h2 className="section-title">Three steps. You&apos;re in.</h2>
+          </div>
+          <p className="max-w-xs text-xs leading-relaxed text-fg-soft">
+            From your first key to your first session.
+            <br />
+            Everything you need is in your dashboard.
+          </p>
+        </div>
+        <div className="grid gap-8 md:grid-cols-3">
+          {steps.map((step, i) => (
             <motion.div
-              key={s.title}
+              key={step.num}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: i * 0.1 }}
-              className="card card-hover group rounded-2xl p-7"
+              transition={{ delay: i * 0.1 }}
+              className="relative border-t border-border pt-6"
             >
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-[0.65rem] font-bold text-fg-dim">{s.num}</span>
-                <div className="icon-ring h-9 w-9">
-                  <s.icon size={16} />
-                </div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] text-cyan">
+                  / {step.num}
+                </span>
+                <step.icon
+                  size={20}
+                  strokeWidth={1.5}
+                  className="text-fg-dim"
+                />
               </div>
-              <h3 className="mt-5 font-display text-base font-semibold text-fg">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-fg-soft">{s.desc}</p>
+              <h3 className="mt-8 font-display text-xl font-medium tracking-tight">
+                {step.title}
+              </h3>
+              <p className="mt-3 max-w-xs text-[11px] leading-[1.9] text-fg-soft">
+                {step.desc}
+              </p>
+              {i < 2 && (
+                <ArrowRight
+                  size={17}
+                  className="absolute -right-6 top-7 hidden text-cyan/40 md:block"
+                />
+              )}
             </motion.div>
           ))}
         </div>

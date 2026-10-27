@@ -44,7 +44,7 @@ export default async function DashboardPage() {
   const steps = [
     { label: "Create your account", done: true },
     { label: "Get your license", done: usable },
-    { label: "Launch the overlay to bind your machine", done: licenses.some((l) => l.hwid) },
+    { label: "Launch Vanta to bind your machine", done: licenses.some((l) => l.hwid) },
   ];
   const onboarding = steps.some((s) => !s.done);
 
@@ -138,7 +138,7 @@ export default async function DashboardPage() {
             </div>
             <div className="flex-1">
               <p className="font-display text-lg font-bold">No active license</p>
-              <p className="mt-1 text-sm text-fg-soft">Pick a plan to access the overlay and downloads.</p>
+              <p className="mt-1 text-sm text-fg-soft">Pick a plan to get your key and downloads.</p>
             </div>
             <Link href="/#pricing" className="btn-primary shrink-0 !px-5 !py-2 !text-xs">
               See plans <ArrowRight size={13} />

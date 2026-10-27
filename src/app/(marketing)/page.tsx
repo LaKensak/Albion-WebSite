@@ -7,13 +7,17 @@ import { Pricing } from "@/components/sections/pricing";
 import { Loyalty } from "@/components/sections/loyalty";
 import { Faq } from "@/components/sections/faq";
 import { Cta } from "@/components/sections/cta";
+import { Games } from "@/components/sections/games";
+import { Showcase } from "@/components/sections/showcase";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
       <Stats />
+      <Games />
       <Features />
+      <Showcase />
       <Setup />
       <TechSpecs />
       <Pricing />

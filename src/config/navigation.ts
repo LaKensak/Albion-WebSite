@@ -1,6 +1,7 @@
 export const marketingNav = [
+  { label: "Games", href: "/games" },
   { label: "Features", href: "/#features" },
-  { label: "Showcase", href: "/#showcase" },
+  { label: "Live preview", href: "/#showcase" },
   { label: "Pricing", href: "/#pricing" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/#faq" },

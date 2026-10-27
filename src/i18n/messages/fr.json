@@ -16,10 +16,10 @@
     "close": "Fermer"
   },
   "hero": {
-    "badge": "Overlay Externe · Mis à jour pour le dernier patch",
-    "title1": "Tout voir.",
-    "title2": "Ne rien craindre.",
-    "subtitle": "L'overlay externe le plus avancé pour Albion Online. ESP, aide au combat, radar et skin changer, totalement indétecté.",
+    "badge": "Indétecté · Mis à jour pour le dernier patch",
+    "title1": "Voir plus.",
+    "title2": "Mourir moins.",
+    "subtitle": "ESP, aimbot, radar et plus pour Albion Online et Rust. Processus externe, indétecté depuis le lancement.",
     "cta": "Obtenir l'accès",
     "features": "Voir les features"
   },
@@ -54,6 +54,6 @@
     "error": "Quelque chose a foiré. Réessaie plus tard."
   },
   "footer": {
-    "copy": "© 2026 Albion Radar"
+    "copy": "© 2026 Vanta"
   }
 }

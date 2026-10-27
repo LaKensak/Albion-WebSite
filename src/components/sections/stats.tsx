@@ -1,36 +1,58 @@
-"use client";
+﻿import { Layers3, Monitor, Settings2, Wallet } from "lucide-react";
 
-import { motion } from "framer-motion";
+import { plans } from "@/config/plans";
 
 const stats = [
-  { value: "0", label: "Detections", detail: "since launch" },
-  { value: "<1ms", label: "Overhead", detail: "render latency" },
-  { value: "500+", label: "Active users", detail: "verified licenses" },
-  { value: "24/7", label: "Support", detail: "response via Discord" },
+  {
+    icon: Layers3,
+    value: "02",
+    label: "Games. One perspective.",
+    detail: "Albion Online & Rust",
+  },
+  {
+    icon: Settings2,
+    value: "100%",
+    label: "Your configuration.",
+    detail: "Independent modules & filters",
+  },
+  {
+    icon: Wallet,
+    value: `€${plans.DAILY.price}`,
+    label: "Your first session.",
+    detail: "Daily access available",
+  },
+  {
+    icon: Monitor,
+    value: "01",
+    label: "Everything in one place.",
+    detail: "Licenses, downloads & updates",
+  },
 ];
 
 export function Stats() {
   return (
-    <section className="px-6 py-4">
-      <div className="mx-auto max-w-6xl">
-        <div className="divider" />
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
-              className={`flex flex-col gap-1 px-8 py-10 ${i > 0 ? "border-l border-white/[0.06]" : ""}`}
-            >
-              <p className="font-display text-4xl font-extrabold tracking-[-0.03em] text-fg md:text-5xl">{s.value}</p>
-              <p className="mt-1 text-sm font-semibold text-fg">{s.label}</p>
-              <p className="text-xs text-fg-dim">{s.detail}</p>
-            </motion.div>
-          ))}
-        </div>
-        <div className="divider" />
+    <section
+      aria-label="Vanta at a glance"
+      className="border-y border-border bg-bg-raised/50"
+    >
+      <div className="site-container grid grid-cols-2 md:grid-cols-4">
+        {stats.map((stat) => (
+          <div
+            key={stat.value}
+            className="border-border px-4 py-7 even:border-l md:border-l md:px-8 md:first:border-l-0"
+          >
+            <div className="flex items-center justify-between">
+              <p className="font-display text-[32px] font-medium tracking-tight">
+                {stat.value}
+              </p>
+              <stat.icon size={16} strokeWidth={1.5} className="text-fg-dim" />
+            </div>
+            <p className="mt-2 text-[10px] font-medium text-fg-soft">
+              {stat.label}
+            </p>
+            <p className="mt-1.5 text-[9px] text-fg-dim">{stat.detail}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

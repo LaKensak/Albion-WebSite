@@ -34,7 +34,7 @@ export default async function LicensesPage({ searchParams }: { searchParams: Pro
         <p className="mt-1 text-sm text-fg-soft">Your key, your machine, your time left.</p>
       </header>
 
-      {ok === "hwid" && <p className="rounded-xl bg-green-bg px-4 py-3 text-sm text-green">Machine unbound. Launch the overlay on your new PC to bind it.</p>}
+      {ok === "hwid" && <p className="rounded-xl bg-green-bg px-4 py-3 text-sm text-green">Machine unbound. Launch Vanta on your new PC to bind it.</p>}
       {error === "cooldown" && <p className="rounded-xl bg-red/10 px-4 py-3 text-sm text-red">You reset too recently. Higher tiers get shorter waits, see Rewards.</p>}
 
       {licenses.length === 0 ? (
@@ -79,7 +79,7 @@ export default async function LicensesPage({ searchParams }: { searchParams: Pro
                   <div>
                     <p className="text-sm font-medium">{l.hwid ? "Machine bound" : "No machine bound yet"}</p>
                     <p className="text-xs text-fg-dim">
-                      {l.hwid ? `ID ${l.hwid.slice(0, 8)}...` : "The first launch of the overlay binds this key to your PC."}
+                      {l.hwid ? `ID ${l.hwid.slice(0, 8)}...` : "First launch binds this key to your PC."}
                     </p>
                   </div>
                 </div>

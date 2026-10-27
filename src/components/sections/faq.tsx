@@ -1,96 +1,81 @@
-"use client";
-
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Plus } from "lucide-react";
+﻿import { ArrowUpRight, Plus } from "lucide-react";
+import Link from "next/link";
 
 const faqs = [
   {
-    q: "Is it detected?",
-    a: "Fully external. Nothing runs inside the game process. Zero confirmed bans since launch. The overlay is invisible to screenshots and screen capture.",
+    q: "How does Vanta work?",
+    a: "Vanta runs as a separate process alongside your game and displays information in an external overlay. Modules vary by game. Explore each game's page for the available features.",
   },
   {
-    q: "How do I receive it?",
-    a: "Once your payment is confirmed, your license and the download appear in your dashboard. The package includes everything you need plus a step-by-step setup guide. No extra dependencies required.",
+    q: "How do I get my license?",
+    a: "Choose a plan, create an account and complete your payment. After payment verification, your license and download appear in your dashboard. A setup guide is included with your package.",
   },
   {
-    q: "Does it work on Windows 11?",
-    a: "Yes. Both Windows 10 and 11 are fully supported. The setup guide gets you running in under 3 minutes.",
+    q: "Which systems are supported?",
+    a: "Windows 10 and Windows 11, both 64-bit, on Intel or AMD. Check the requirements on your game's page before buying.",
   },
   {
-    q: "What payment methods are accepted?",
-    a: "Crypto (BTC, ETH, USDT, LTC) and PayPal Friends & Family. You check out on the site, send the payment, submit the transaction ID, and your license is activated after verification.",
+    q: "Which payment methods can I use?",
+    a: "Bitcoin, Ethereum, USDT (TRC20), Litecoin and PayPal Friends & Family. After checking out, send your payment and submit the transaction ID for verification.",
   },
   {
-    q: "What if a game update breaks it?",
-    a: "Offsets are updated within hours of a patch. Your license stays active during downtime. The overlay warns you automatically if an update is needed.",
+    q: "Can I customise the overlay?",
+    a: "Yes. Each module can be toggled independently. Adjust filters, render distance and hotkeys to suit your play style. Try the interactive preview above for an illustrative example.",
   },
   {
-    q: "Can I use only some modules?",
-    a: "Yes. Every module is independent. Toggle what you want via the settings menu. Each feature is optional and configured separately from the others.",
+    q: "What happens after a game update?",
+    a: "Check your dashboard for the latest compatible build and update information. Your existing license remains in your account; download an updated version when it becomes available.",
   },
 ];
 
 export function Faq() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   return (
-    <section id="faq" className="relative px-6 py-28">
-      <div className="divider mx-auto max-w-3xl" />
-      <div className="mx-auto mt-28 max-w-3xl">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5 }}
-          className="mb-14"
+    <section
+      id="faq"
+      className="site-container section-space grid gap-12 md:grid-cols-[.8fr_1.2fr]"
+    >
+      <div>
+        <p className="section-label">A little clarity</p>
+        <h2 className="section-title">
+          Good questions.
+          <br />
+          <span className="text-fg-dim">Clear answers.</span>
+        </h2>
+        <p className="mt-5 max-w-xs text-xs leading-relaxed text-fg-soft">
+          The details before you dive in. For more about a specific game,
+          explore its product page.
+        </p>
+        <Link
+          href="/games"
+          className="mt-6 inline-flex items-center gap-2 text-[11px] text-cyan"
         >
-          <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-fg-dim">FAQ</p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
-            Common questions.
-          </h2>
-        </motion.div>
-
-        <div className="flex flex-col divide-y divide-white/[0.06]">
-          {faqs.map((f, i) => {
-            const isOpen = openIndex === i;
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: i * 0.04 }}
-              >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-6 py-5 text-left text-[0.9375rem] font-semibold text-fg transition-colors hover:text-fg-soft"
-                >
-                  {f.q}
-                  <Plus
-                    size={18}
-                    className={`shrink-0 text-fg-dim transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
-                  />
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <p className="pb-5 text-sm leading-relaxed text-fg-soft">{f.a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </div>
+          Explore our games <ArrowUpRight size={13} />
+        </Link>
+      </div>
+      <div className="border-t border-border">
+        {faqs.map((faq, i) => (
+          <details
+            name="questions"
+            key={faq.q}
+            className="faq-item group border-b border-border"
+          >
+            <summary className="flex items-center justify-between gap-5 py-5 text-xs font-medium transition-colors hover:text-cyan">
+              <span className="flex items-start gap-4">
+                <span className="mt-px font-mono text-[9px] text-fg-dim">
+                  0{i + 1}
+                </span>
+                {faq.q}
+              </span>
+              <Plus
+                size={16}
+                className="faq-plus shrink-0 text-fg-dim transition-transform"
+              />
+            </summary>
+            <p className="pb-6 pl-7 pr-5 text-[11px] leading-[1.9] text-fg-soft">
+              {faq.a}
+            </p>
+          </details>
+        ))}
       </div>
     </section>
   );

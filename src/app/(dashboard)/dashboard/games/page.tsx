@@ -10,25 +10,25 @@ const games = [
   {
     id:     "albion",
     name:   "Albion Online",
-    desc:   "ESP overlay with player, animal and resource tracking.",
+    desc:   "ESP with player, resource and entity tracking plus radar.",
     status: "live" as const,
   },
   {
     id:     "rust",
     name:   "Rust",
-    desc:   "Player ESP, item ESP and base detection overlay.",
+    desc:   "Player ESP, world ESP, aimbot and homing.",
     status: "live" as const,
   },
   {
     id:     "arc",
     name:   "ARC RAIDERS",
-    desc:   "Overlay in development. Join the waitlist.",
+    desc:   "In development. Join the waitlist.",
     status: "pending" as const,
   },
   {
     id:     "mw4",
     name:   "CoD MW4",
-    desc:   "Overlay in development. Join the waitlist.",
+    desc:   "In development. Join the waitlist.",
     status: "pending" as const,
   },
 ];
@@ -40,7 +40,7 @@ export default function GamesPage() {
     <div className="flex flex-col gap-6">
       <header>
         <h1 className="font-display text-2xl font-bold tracking-tight">Games</h1>
-        <p className="mt-0.5 text-sm text-fg-soft">Every overlay available on the platform.</p>
+        <p className="mt-0.5 text-sm text-fg-soft">All supported games.</p>
       </header>
 
       <div className="flex flex-col gap-3">
