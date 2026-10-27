@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import type { LicenseType, PaymentMethod, PaymentStatus } from "@prisma/client";
 
 export const paymentRepo = {
-  create: (data: { userId: string; plan: LicenseType; amount: number; method: PaymentMethod }) =>
+  create: (data: { userId: string; plan: LicenseType; amount: number; method: PaymentMethod; discountPct?: number }) =>
     db.payment.create({ data }),
 
   findById: (id: string) =>
@@ -26,3 +26,8 @@ export const paymentRepo = {
   setStatus: (id: string, status: PaymentStatus, licenseId?: string) =>
     db.payment.update({ where: { id }, data: { status, licenseId } }),
 };
+
+export async function confirmedRevenue() {
+  const agg = await db.payment.aggregate({ where: { status: "CONFIRMED" }, _sum: { amount: true } });
+  return agg._sum.amount ?? 0;
+}

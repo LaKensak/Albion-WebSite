@@ -44,7 +44,7 @@ export function Showcase() {
               <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/60" />
               <span className="h-2.5 w-2.5 rounded-full bg-green/60" />
               <span className="ml-3 font-mono text-[0.65rem] text-fg-dim">
-                Albion Radar — {slides[idx].title}
+                Albion Radar · {slides[idx].title}
               </span>
             </div>
             <div className="relative aspect-video bg-bg-card">

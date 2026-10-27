@@ -4,7 +4,7 @@ import { authConfig } from "@/lib/auth/config";
 const { auth } = NextAuth(authConfig);
 
 const protectedPrefixes = ["/dashboard", "/admin", "/checkout"];
-const authPages = ["/login"];
+const authPages = ["/login", "/register"];
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
@@ -26,5 +26,5 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*", "/checkout", "/login"],
+  matcher: ["/dashboard/:path*", "/admin/:path*", "/checkout", "/login", "/register"],
 };

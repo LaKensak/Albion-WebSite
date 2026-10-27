@@ -1,9 +1,10 @@
 import type { LicenseType, PaymentMethod } from "@prisma/client";
 
 export const plans: Record<LicenseType, { name: string; price: number; period: string; features: string[]; featured?: boolean }> = {
-  WEEKLY: { name: "Weekly", price: 10, period: "/week", features: ["All modules", "Auto-updates", "Discord support"] },
-  MONTHLY: { name: "Monthly", price: 25, period: "/month", featured: true, features: ["All modules", "Auto-updates", "Priority support", "Config backup"] },
-  LIFETIME: { name: "Lifetime", price: 75, period: "once", features: ["All modules forever", "Auto-updates", "Priority support", "Config backup", "Early access"] },
+  DAILY:    { name: "Daily",    price: 3,  period: "/day",   features: ["All modules", "Auto-updates", "Discord support"] },
+  WEEKLY:   { name: "Weekly",   price: 10, period: "/week",  features: ["All modules", "Auto-updates", "Discord support"] },
+  MONTHLY:  { name: "Monthly",  price: 25, period: "/month", featured: true, features: ["All modules", "Auto-updates", "Priority support", "Config backup"] },
+  LIFETIME: { name: "Lifetime", price: 75, period: "once",   features: ["All modules forever", "Auto-updates", "Priority support", "Config backup", "Early access"] },
 };
 
 export const methods: Record<PaymentMethod, { label: string; address?: string; hint: string }> = {

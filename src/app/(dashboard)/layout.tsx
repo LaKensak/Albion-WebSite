@@ -1,67 +1,95 @@
-import Link from "next/link";
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import { LayoutDashboard, Key, Settings, LogOut, Shield } from "lucide-react";
+export const dynamic = "force-dynamic";
 
-const nav = [
-  { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Licenses", href: "/dashboard/licenses", icon: Key },
-  { label: "Settings", href: "/dashboard/settings", icon: Settings },
-];
+import Link from "next/link";
+import { LogOut } from "lucide-react";
+import { requireAuth } from "@/lib/auth/guards";
+import { signOutAction } from "@/server/actions/auth";
+import { DashboardNav } from "@/components/dashboard/nav";
+
+function Logo() {
+  return (
+    <Link href="/" className="flex items-center gap-2.5 group">
+      <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-white/[0.1] bg-bg-card text-fg transition-opacity group-hover:opacity-90">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <circle cx="7.5" cy="7.5" r="2.5" fill="currentColor" />
+          <circle cx="7.5" cy="7.5" r="6" stroke="currentColor" strokeWidth="1.5" fill="none" />
+          <line x1="7.5" y1="1" x2="7.5" y2="3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="7.5" y1="11.5" x2="7.5" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="1" y1="7.5" x2="3.5" y2="7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="11.5" y1="7.5" x2="14" y2="7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </span>
+      <span className="font-display text-sm font-bold tracking-tight">Ghost Overlay</span>
+    </Link>
+  );
+}
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth();
-  if (!session) redirect("/login");
-
-  const isAdmin = session.user?.role === "ADMIN";
+  const session = await requireAuth();
+  const isAdmin = session.user.role === "ADMIN";
+  const name = session.user.name ?? session.user.email ?? "Member";
+  const initial = name[0]?.toUpperCase() ?? "?";
 
   return (
-    <div className="flex min-h-screen">
-      <aside className="hidden w-60 shrink-0 border-r border-white/[0.04] bg-bg-raised md:block">
-        <div className="flex h-16 items-center gap-2.5 px-6">
-          <span className="h-2 w-2 rounded-full bg-green shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-          <span className="font-display text-sm font-bold">Albion Radar</span>
+    <div className="min-h-screen md:flex">
+      {/* ── Desktop sidebar ── */}
+      <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-white/[0.06] bg-bg-raised md:flex">
+        {/* Logo */}
+        <div className="flex h-14 items-center border-b border-white/[0.06] px-4">
+          <Logo />
         </div>
-        <nav className="mt-2 flex flex-col gap-1 px-3">
-          {nav.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-fg-soft transition-colors hover:bg-white/[0.04] hover:text-fg"
-            >
-              <n.icon size={16} />
-              {n.label}
-            </Link>
-          ))}
-          {isAdmin && (
-            <Link
-              href="/admin"
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-violet transition-colors hover:bg-violet/[0.06]"
-            >
-              <Shield size={16} />
-              Admin Panel
-            </Link>
-          )}
-        </nav>
-        <div className="mt-auto border-t border-white/[0.04] p-4">
-          <div className="flex items-center gap-3">
-            {session.user?.image && (
-              <img
-                src={session.user.image}
-                alt=""
-                className="h-8 w-8 rounded-full"
-              />
-            )}
+
+        {/* Navigation */}
+        <div className="flex-1 overflow-y-auto px-3 pt-2">
+          <p className="mb-1 px-3 text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-fg-dim">Menu</p>
+          <DashboardNav isAdmin={isAdmin} variant="side" />
+        </div>
+
+        {/* Bottom: user row */}
+        <div className="border-t border-white/[0.06] px-3 py-4">
+          <div className="flex items-center gap-3 rounded-xl px-2 py-1.5">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.05] font-display text-[0.8125rem] font-bold text-fg-soft">
+              {initial}
+            </span>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium">{session.user?.name}</p>
-              <p className="truncate text-xs text-fg-dim">{session.user?.email}</p>
+              <p className="truncate text-[0.8125rem] font-semibold leading-none text-fg">{name}</p>
+              <p className="mt-0.5 truncate text-[0.7rem] text-fg-dim">{session.user.email}</p>
             </div>
+            <form action={signOutAction}>
+              <button
+                type="submit"
+                aria-label="Sign out"
+                className="flex h-7 w-7 items-center justify-center rounded-lg text-fg-dim transition-colors hover:bg-white/[0.06] hover:text-fg"
+              >
+                <LogOut size={13} />
+              </button>
+            </form>
           </div>
         </div>
       </aside>
 
-      <main className="flex-1 overflow-auto">
-        <div className="mx-auto max-w-6xl px-6 py-8">{children}</div>
+      {/* ── Mobile header ── */}
+      <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-bg/90 backdrop-blur-xl md:hidden">
+        <div className="flex h-14 items-center justify-between px-4">
+          <Logo />
+          <div className="flex items-center gap-2">
+            <form action={signOutAction}>
+              <button
+                type="submit"
+                aria-label="Sign out"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-fg-dim hover:bg-white/[0.06] hover:text-fg"
+              >
+                <LogOut size={14} />
+              </button>
+            </form>
+          </div>
+        </div>
+        <DashboardNav isAdmin={isAdmin} variant="top" />
+      </header>
+
+      {/* ── Main content ── */}
+      <main className="min-w-0 flex-1 bg-bg">
+        <div className="mx-auto max-w-5xl px-5 py-8 md:px-8 md:py-10">{children}</div>
       </main>
     </div>
   );

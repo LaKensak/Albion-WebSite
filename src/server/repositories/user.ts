@@ -5,8 +5,6 @@ export const userRepo = {
   findById: (id: string) =>
     db.user.findUnique({ where: { id }, include: { licenses: true } }),
 
-  findByDiscordId: (discordId: string) =>
-    db.user.findUnique({ where: { discordId } }),
 
   setRole: (id: string, role: Role) =>
     db.user.update({ where: { id }, data: { role } }),

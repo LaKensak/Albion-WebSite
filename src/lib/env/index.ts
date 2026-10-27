@@ -3,8 +3,6 @@ import { z } from "zod";
 const envSchema = z.object({
   DATABASE_URL: z.string().url(),
   AUTH_SECRET: z.string().min(16),
-  AUTH_DISCORD_ID: z.string().min(1),
-  AUTH_DISCORD_SECRET: z.string().min(1),
   DISCORD_WEBHOOK_CONTACT: z.string().url().optional(),
   DISCORD_WEBHOOK_LOGS: z.string().url().optional(),
   DISCORD_BOT_TOKEN: z.string().optional(),

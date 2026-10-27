@@ -38,7 +38,7 @@ export default async function AdminLicensesPage() {
                 <td className="py-3 text-fg-dim">
                   {l.expiresAt ? new Date(l.expiresAt).toLocaleDateString() : "Lifetime"}
                 </td>
-                <td className="py-3 font-mono text-xs text-fg-dim">{l.hwid ?? "—"}</td>
+                <td className="py-3 font-mono text-xs text-fg-dim">{l.hwid ?? "-"}</td>
               </tr>
             ))}
           </tbody>

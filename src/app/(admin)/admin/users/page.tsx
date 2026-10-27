@@ -15,7 +15,6 @@ export default async function AdminUsersPage() {
               <th className="pb-3 font-medium">Name</th>
               <th className="pb-3 font-medium">Email</th>
               <th className="pb-3 font-medium">Role</th>
-              <th className="pb-3 font-medium">Discord</th>
               <th className="pb-3 font-medium">Banned</th>
               <th className="pb-3 font-medium">Joined</th>
             </tr>
@@ -23,8 +22,8 @@ export default async function AdminUsersPage() {
           <tbody>
             {users.map((u) => (
               <tr key={u.id} className="border-b border-white/[0.03]">
-                <td className="py-3 font-medium">{u.name ?? "—"}</td>
-                <td className="py-3 text-fg-soft">{u.email ?? "—"}</td>
+                <td className="py-3 font-medium">{u.name ?? "-"}</td>
+                <td className="py-3 text-fg-soft">{u.email ?? "-"}</td>
                 <td className="py-3">
                   <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                     u.role === "ADMIN" ? "bg-violet/10 text-violet" : "bg-white/[0.04] text-fg-soft"
@@ -32,7 +31,6 @@ export default async function AdminUsersPage() {
                     {u.role}
                   </span>
                 </td>
-                <td className="py-3 font-mono text-xs text-fg-dim">{u.discordTag ?? "—"}</td>
                 <td className="py-3">{u.banned ? "Yes" : "No"}</td>
                 <td className="py-3 text-fg-dim">{new Date(u.createdAt).toLocaleDateString()}</td>
               </tr>

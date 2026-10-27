@@ -27,7 +27,7 @@ export default async function AdminPaymentsPage() {
                 <td className="py-3">{p.user.name ?? p.user.email}</td>
                 <td className="py-3">{p.plan} &middot; &euro;{p.amount}</td>
                 <td className="py-3 text-fg-soft">{p.method}</td>
-                <td className="max-w-[16rem] truncate py-3 font-mono text-xs text-fg-dim">{p.txRef ?? "—"}</td>
+                <td className="max-w-[16rem] truncate py-3 font-mono text-xs text-fg-dim">{p.txRef ?? "-"}</td>
                 <td className="py-3">{p.status}</td>
                 <td className="py-3">
                   {p.status === "SUBMITTED" && (

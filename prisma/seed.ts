@@ -1,37 +1,31 @@
 import { PrismaClient } from "@prisma/client";
-import crypto from "crypto";
+import { PrismaPg } from "@prisma/adapter-pg";
+import bcrypt from "bcryptjs";
+import { generateReferralCode } from "../src/lib/referral";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({
+    connectionString: (() => { const u = new URL(process.env.DATABASE_URL!); u.searchParams.delete("sslmode"); u.searchParams.delete("pgbouncer"); return u.toString(); })(),
+    ssl: { rejectUnauthorized: false },
+  }),
+});
 
 async function main() {
-  const adminEmail = process.env.ADMIN_EMAIL ?? "admin@albionradar.com";
+  const email = process.env.ADMIN_EMAIL?.toLowerCase();
+  const password = process.env.ADMIN_PASSWORD;
+  if (!email || !password || password.length < 8) {
+    throw new Error("Set ADMIN_EMAIL and ADMIN_PASSWORD (min 8 chars) in .env.local");
+  }
 
   await prisma.user.upsert({
-    where: { email: adminEmail },
-    update: { role: "ADMIN" },
-    create: {
-      email: adminEmail,
-      name: "Admin",
-      role: "ADMIN",
-    },
+    where: { email },
+    update: { role: "ADMIN", passwordHash: await bcrypt.hash(password, 12) },
+    create: { email, name: "Admin", role: "ADMIN", referralCode: generateReferralCode(), passwordHash: await bcrypt.hash(password, 12) },
   });
 
-  await prisma.category.upsert({
-    where: { slug: "changelog" },
-    update: {},
-    create: { name: "Changelog", slug: "changelog" },
-  });
-  await prisma.category.upsert({
-    where: { slug: "guide" },
-    update: {},
-    create: { name: "Guide", slug: "guide" },
-  });
-  await prisma.category.upsert({
-    where: { slug: "news" },
-    update: {},
-    create: { name: "News", slug: "news" },
-  });
-
+  for (const [name, slug] of [["Changelog", "changelog"], ["Guide", "guide"], ["News", "news"]]) {
+    await prisma.category.upsert({ where: { slug }, update: {}, create: { name, slug } });
+  }
   const changelog = await prisma.category.findUnique({ where: { slug: "changelog" } });
 
   await prisma.post.upsert({

@@ -3,20 +3,23 @@ export const dynamic = "force-dynamic";
 import { userRepo } from "@/server/repositories/user";
 import { licenseRepo } from "@/server/repositories/license";
 import { contactRepo } from "@/server/repositories/contact";
+import { confirmedRevenue } from "@/server/repositories/payment";
+import { eur } from "@/lib/format";
 import { Users, Key, MessageSquare, TrendingUp } from "lucide-react";
 
 export default async function AdminDashboard() {
-  const [userCount, licenseCount, unreadMessages] = await Promise.all([
+  const [userCount, licenseCount, unreadMessages, revenue] = await Promise.all([
     userRepo.countAll(),
     licenseRepo.countActive(),
     contactRepo.countUnread(),
+    confirmedRevenue(),
   ]);
 
   const cards = [
     { icon: Users, label: "Total Users", value: userCount, color: "text-cyan" },
     { icon: Key, label: "Active Licenses", value: licenseCount, color: "text-green" },
     { icon: MessageSquare, label: "Unread Messages", value: unreadMessages, color: "text-violet" },
-    { icon: TrendingUp, label: "Revenue", value: "N/A", color: "text-cyan" },
+    { icon: TrendingUp, label: "Revenue", value: eur(revenue), color: "text-cyan" },
   ];
 
   return (

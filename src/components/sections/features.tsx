@@ -1,86 +1,67 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Crosshair, Swords, Palette, Eye, Camera, MapPin } from "lucide-react";
+import { Layers, ShieldOff, RefreshCw, Lock } from "lucide-react";
 
 const features = [
   {
-    icon: Crosshair,
-    title: "ESP Overlay",
-    desc: "Players, mobs, resources, dungeons rendered on an external overlay. Names, health bars, distances. Filter anything.",
-    span: "md:col-span-2",
+    icon: Layers,
+    title: "Multi-game platform",
+    desc: "Each supported game has its own dedicated overlay. Buy only what you play.",
   },
   {
-    icon: Swords,
-    title: "Combat Assist",
-    desc: "Auto-combo, ability timers, cooldown tracking. Configurable aggression per weapon type.",
-    span: "md:col-span-2",
+    icon: ShieldOff,
+    title: "External process",
+    desc: "Nothing runs inside the game. The overlay draws on a separate window, leaving zero trace in memory.",
   },
   {
-    icon: Palette,
-    title: "Skin Changer",
-    desc: "Swap any gear appearance client-side. Preview skins before buying on the marketplace.",
-    span: "",
+    icon: RefreshCw,
+    title: "Same-day updates",
+    desc: "Patch dropped? We push an update within hours. Your overlay keeps working when others go dark.",
   },
   {
-    icon: Eye,
-    title: "Radar",
-    desc: "Minimap overlay with real-time player positions. Custom range, icon sizing, threat colors.",
-    span: "",
-  },
-  {
-    icon: Camera,
-    title: "Free Camera",
-    desc: "First and third person camera unlock. Full orbit, zoom, tilt control.",
-    span: "",
-  },
-  {
-    icon: MapPin,
-    title: "Gatherer Mode",
-    desc: "Highlight rare resources and enchanted nodes with distance markers and respawn timers.",
-    span: "",
+    icon: Lock,
+    title: "Private by design",
+    desc: "No usage logs, no telemetry. Your hardware ID is only used once for license binding.",
   },
 ];
 
 export function Features() {
   return (
-    <section id="features" className="relative px-6 py-28">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[70%] -translate-x-1/2 bg-gradient-to-r from-transparent via-border-h to-transparent" />
-      <div className="mx-auto max-w-6xl">
+    <section id="features" className="relative px-6 py-24">
+      <div className="divider mx-auto max-w-5xl" />
+
+      <div className="mx-auto mt-20 max-w-5xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
-          className="text-center"
+          className="mb-14"
         >
-          <p className="font-mono text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-cyan">
-            Features
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
-            Everything you need to dominate
+          <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-fg-dim">Platform</p>
+          <h2 className="mt-3 font-display text-4xl font-extrabold tracking-[-0.02em]">
+            Built differently.
           </h2>
         </motion.div>
 
-        <div className="mt-14 grid gap-4 md:grid-cols-4">
+        <div className="grid gap-px md:grid-cols-2" style={{ background: "var(--color-border)" }}>
           {features.map((f, i) => (
             <motion.div
               key={f.title}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: i * 0.06 }}
-              className={`glass-card group rounded-2xl p-7 ${f.span}`}
+              className="group flex flex-col gap-4 bg-bg p-8 transition-colors hover:bg-bg-raised"
             >
-              <div className="icon-ring h-11 w-11">
-                <f.icon size={20} />
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.07] bg-bg-card text-fg-soft transition-colors group-hover:border-white/[0.12] group-hover:text-fg">
+                <f.icon size={16} strokeWidth={1.5} />
               </div>
-              <h3 className="mt-5 font-display text-base font-semibold">
-                {f.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-fg-soft">
-                {f.desc}
-              </p>
+              <div>
+                <h3 className="font-display text-sm font-semibold text-fg">{f.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-fg-soft">{f.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>

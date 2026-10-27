@@ -7,11 +7,11 @@ import Link from "next/link";
 export function Cta() {
   return (
     <section className="relative overflow-hidden px-6 py-32">
+      {/* Background */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[15%] top-[10%] h-[400px] w-[400px] rounded-full bg-cyan/[0.04] blur-[130px]" />
-        <div className="absolute bottom-[5%] right-[10%] h-[350px] w-[350px] rounded-full bg-violet/[0.06] blur-[110px]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-15" />
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}
@@ -20,20 +20,20 @@ export function Cta() {
         transition={{ duration: 0.6 }}
         className="relative mx-auto max-w-2xl text-center"
       >
-        <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
-          Ready to see{" "}
-          <span className="bg-gradient-to-r from-cyan to-violet bg-clip-text text-transparent">
-            everything
-          </span>
-          ?
+        <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-fg-dim">Get started</p>
+        <h2 className="mt-4 font-display text-4xl font-bold tracking-tight md:text-5xl">
+          Ready to get started?
         </h2>
         <p className="mx-auto mt-5 max-w-md text-lg text-fg-soft">
-          Pick your plan, pay, and get full access within minutes.
+          Pick a plan and get access within minutes.
         </p>
-        <div className="mt-10">
-          <Link href="#pricing" className="btn-primary group">
-            Get Access Now
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <Link href="#pricing" className="btn-primary group text-base">
+            Get Access
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+          </Link>
+          <Link href="/register" className="btn-ghost text-base">
+            Create account
           </Link>
         </div>
       </motion.div>
