@@ -1,0 +1,59 @@
+{
+  "common": {
+    "getAccess": "Get Access",
+    "login": "Sign In",
+    "logout": "Sign Out",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "undetected": "Undetected",
+    "loading": "Loading...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close"
+  },
+  "hero": {
+    "badge": "External Overlay — Updated for Latest Patch",
+    "title1": "See everything.",
+    "title2": "Fear nothing.",
+    "subtitle": "The most advanced external overlay for Albion Online. ESP, combat assist, radar, skin changer — fully undetected.",
+    "cta": "Get Access",
+    "features": "Explore Features"
+  },
+  "nav": {
+    "features": "Features",
+    "showcase": "Showcase",
+    "pricing": "Pricing",
+    "blog": "Blog",
+    "faq": "FAQ"
+  },
+  "pricing": {
+    "title": "Pick your plan",
+    "subtitle": "Crypto or PayPal via Discord DM. Instant delivery after confirmation.",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "lifetime": "Lifetime",
+    "bestValue": "Best value",
+    "getWeekly": "Get Weekly",
+    "getMonthly": "Get Monthly",
+    "getLifetime": "Get Lifetime",
+    "joinDiscord": "Join the Discord",
+    "discordDesc": "All purchases, support, updates and delivery happen through Discord."
+  },
+  "contact": {
+    "title": "Get in touch",
+    "name": "Your name",
+    "email": "Email address",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send message",
+    "success": "Message sent! We'll get back to you on Discord.",
+    "error": "Something went wrong. Try again later."
+  },
+  "footer": {
+    "copy": "© 2026 Albion Radar"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "common": {
+    "getAccess": "Obtenir l'accès",
+    "login": "Se connecter",
+    "logout": "Déconnexion",
+    "dashboard": "Tableau de bord",
+    "admin": "Admin",
+    "undetected": "Indétecté",
+    "loading": "Chargement...",
+    "submit": "Envoyer",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "delete": "Supprimer",
+    "back": "Retour",
+    "next": "Suivant",
+    "close": "Fermer"
+  },
+  "hero": {
+    "badge": "Overlay Externe — Mis à jour pour le dernier patch",
+    "title1": "Tout voir.",
+    "title2": "Ne rien craindre.",
+    "subtitle": "L'overlay externe le plus avancé pour Albion Online. ESP, aide au combat, radar, skin changer — totalement indétecté.",
+    "cta": "Obtenir l'accès",
+    "features": "Voir les features"
+  },
+  "nav": {
+    "features": "Features",
+    "showcase": "Showcase",
+    "pricing": "Tarifs",
+    "blog": "Blog",
+    "faq": "FAQ"
+  },
+  "pricing": {
+    "title": "Choisis ton plan",
+    "subtitle": "Crypto ou PayPal via Discord DM. Livraison instantanée après confirmation.",
+    "weekly": "Hebdo",
+    "monthly": "Mensuel",
+    "lifetime": "À vie",
+    "bestValue": "Meilleur rapport",
+    "getWeekly": "Prendre l'hebdo",
+    "getMonthly": "Prendre le mensuel",
+    "getLifetime": "Prendre à vie",
+    "joinDiscord": "Rejoins le Discord",
+    "discordDesc": "Tous les achats, le support, les mises à jour et la livraison passent par Discord."
+  },
+  "contact": {
+    "title": "Nous contacter",
+    "name": "Ton nom",
+    "email": "Adresse email",
+    "subject": "Sujet",
+    "message": "Message",
+    "send": "Envoyer le message",
+    "success": "Message envoyé ! On te répond sur Discord.",
+    "error": "Quelque chose a foiré. Réessaie plus tard."
+  },
+  "footer": {
+    "copy": "© 2026 Albion Radar"
+  }
+}
